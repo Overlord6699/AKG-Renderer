@@ -17,3 +17,6 @@ C:\Users\Ilya\Desktop\CGA_1\CGA_1\obj\Debug\CGA_1.csproj.GenerateResource.cache
 C:\Users\Ilya\Desktop\CGA_1\CGA_1\obj\Debug\CGA_1.csproj.CoreCompileInputs.cache
 C:\Users\Ilya\Desktop\CGA_1\CGA_1\obj\Debug\CGA_1.exe
 C:\Users\Ilya\Desktop\CGA_1\CGA_1\obj\Debug\CGA_1.pdb
+C:\Users\Ilya\Desktop\CGA_1\CGA_1\bin\Debug\CGA_1.exe.config
+C:\Users\Ilya\Desktop\CGA_1\CGA_1\bin\Debug\CGA_1.exe
+C:\Users\Ilya\Desktop\CGA_1\CGA_1\bin\Debug\CGA_1.pdb

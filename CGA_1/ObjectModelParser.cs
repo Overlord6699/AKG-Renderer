@@ -9,9 +9,11 @@ namespace CGA_1
     {
         const short VALUES_NUM = 4;
 
-        public ObjModel ParseObjFile(in string filePath)
+        public EventHandler OnObjectParsed;
+
+        public void ParseObjFile(ref ObjModel model, in string filePath)
         {
-            ObjModel _model = new ObjModel();
+            model = new ObjModel();
 
             using (StreamReader reader = new StreamReader(filePath))
             {
@@ -29,7 +31,8 @@ namespace CGA_1
                             float x = float.Parse(parts[1], CultureInfo.InvariantCulture);
                             float y = float.Parse(parts[2], CultureInfo.InvariantCulture);
                             float z = float.Parse(parts[3], CultureInfo.InvariantCulture);
-                            _model.Vertices.Add(new Vector3(x, y, z));
+                            
+                            model.Vertices.Add(new Vector3(x, y, z));
                         }
 
                         // Полигоны -> ребра
@@ -39,9 +42,9 @@ namespace CGA_1
                             int v2 = int.Parse(parts[2].Split('/')[0]) - 1;
                             int v3 = int.Parse(parts[3].Split('/')[0]) - 1;
 
-                            _model.Edges.Add(new Tuple<Vector3, Vector3>(_model.Vertices.ElementAt(v1), _model.Vertices.ElementAt(v2)));
-                            _model.Edges.Add(new Tuple<Vector3, Vector3>(_model.Vertices.ElementAt(v2), _model.Vertices.ElementAt(v3)));
-                            _model.Edges.Add(new Tuple<Vector3, Vector3>(_model.Vertices.ElementAt(v3), _model.Vertices.ElementAt(v1)));
+                            model.Edges.Add(new Tuple<Vector3, Vector3>(model.Vertices.ElementAt(v1), model.Vertices.ElementAt(v2)));
+                            model.Edges.Add(new Tuple<Vector3, Vector3>(model.Vertices.ElementAt(v2), model.Vertices.ElementAt(v3)));
+                            model.Edges.Add(new Tuple<Vector3, Vector3>(model.Vertices.ElementAt(v3), model.Vertices.ElementAt(v1)));
                             /*model.Edges.Add(new Tuple<int, int>(v1, v2));
                             model.Edges.Add(new Tuple<int, int>(v2, v3));
                             model.Edges.Add(new Tuple<int, int>(v3, v1));*/
@@ -53,10 +56,10 @@ namespace CGA_1
                             int v3 = int.Parse(parts[3].Split('/')[0]) - 1;
                             int v4 = int.Parse(parts[4].Split('/')[0]) - 1;
 
-                            _model.Edges.Add(new Tuple<Vector3, Vector3>(_model.Vertices.ElementAt(v1), _model.Vertices.ElementAt(v2)));
-                            _model.Edges.Add(new Tuple<Vector3, Vector3>(_model.Vertices.ElementAt(v2), _model.Vertices.ElementAt(v3)));
-                            _model.Edges.Add(new Tuple<Vector3, Vector3>(_model.Vertices.ElementAt(v3), _model.Vertices.ElementAt(v4)));
-                            _model.Edges.Add(new Tuple<Vector3, Vector3>(_model.Vertices.ElementAt(v4), _model.Vertices.ElementAt(v1)));
+                            model.Edges.Add(new Tuple<Vector3, Vector3>(model.Vertices.ElementAt(v1), model.Vertices.ElementAt(v2)));
+                            model.Edges.Add(new Tuple<Vector3, Vector3>(model.Vertices.ElementAt(v2), model.Vertices.ElementAt(v3)));
+                            model.Edges.Add(new Tuple<Vector3, Vector3>(model.Vertices.ElementAt(v3), model.Vertices.ElementAt(v4)));
+                            model.Edges.Add(new Tuple<Vector3, Vector3>(model.Vertices.ElementAt(v4), model.Vertices.ElementAt(v1)));
                             /*model.Edges.Add(new Tuple<int, int>(v1, v2));
                             model.Edges.Add(new Tuple<int, int>(v2, v3));
                             model.Edges.Add(new Tuple<int, int>(v3, v4));
@@ -65,7 +68,8 @@ namespace CGA_1
                     }
                 }
             }
-            return _model;
+
+            OnObjectParsed?.Invoke(this, EventArgs.Empty);
         }
     }
 }
