@@ -1,8 +1,11 @@
-﻿using System;
+﻿using CGA_1.CameraInstances;
+using CGA_1.ControlsHandlers;
+using System;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Numerics;
 using System.Windows.Forms;
 
 namespace CGA_1
@@ -11,7 +14,10 @@ namespace CGA_1
     {
         private float currentScale = 1.0f;
 
+        private Camera _camera;
+
         private ObjModel _model;
+
         public Form1()
         {
             InitializeComponent();
@@ -19,6 +25,11 @@ namespace CGA_1
             Color backColor = Color.FromArgb(32, 33, 36);
             this.BackColor = backColor;
 
+
+
+            _camera = new Camera { Position = new Vector3(0, 0, -60) };
+
+            //var camHandler = new CameraControlHandler(this.panel3D1, _camera);
         }
 
 
